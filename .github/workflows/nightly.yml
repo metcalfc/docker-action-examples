@@ -1,0 +1,22 @@
+name: Main Branch CI
+
+# Run the nightly tests at at 2 AM UTC
+on:
+  schedule:
+    - cron: "0 2 * * *"
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    env:
+      PROD_IMAGE: ghcr.io/metcalfc/docker-action-examples:edge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Compose up
+        run: docker-compose -f docker-compose.yml up -d
+      - name: Check running containers
+        run: docker ps -a
+      - name: Check logs
+        run: docker logs web
+      - name: Compose down
+        run: docker-compose -f docker-compose.yml down

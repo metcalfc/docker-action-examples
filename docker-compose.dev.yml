@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: ./app
+      target: prod
+    environment:
+      - FLASK_ENV=development
+    volumes:
+      - "${PWD}/app:/app"
+    ports:
+      - "5000:5000"

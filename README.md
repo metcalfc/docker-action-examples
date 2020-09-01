@@ -35,13 +35,10 @@ new Docker Buildx Action. This is going to let us achieve a couple awesome outco
   [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L70-L71)
 - We are going to setup QEMU to do cross platform builds. In the example, we'll
   build this application for every Linux architecture that Docker Hub supports. [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L35-L38) [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L67)
-  - linux/386
-  - linux/amd64
-  - linux/arm/v6
-  - linux/arm/v7
-  - linux/arm64
-  - linux/ppc64le
-  - linux/s390x
+
+<p align="center">
+  <a href="https://hub.docker.com/repository/docker/metcalfc/docker-action-examples/tags?page=1"><img src="hub.png" width="800" title="Docker Hub Multiarch"></a>
+</p>
 
 I'm not going to have GitHub Action manage the deployment side of this example.
 Mostly because I don't want to leave an Amazon ECS cluster running. But you can

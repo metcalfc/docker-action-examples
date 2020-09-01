@@ -10,6 +10,9 @@ endif
 
 # Docker image tagging:
 HUB_USER?=${USER}
+
+# When you create your secret use the DockerHub in the name and this will find it
+HUB_PULL_SECRET?=$(shell docker secret list | grep arn | grep DockerHub | cut -f1 -d' ')
 REPO?=$(shell basename ${PWD})
 TAG?=${GIT_TAG}
 DEV_IMAGE?=${REPO}:latest
@@ -28,27 +31,27 @@ dev:
 # Run the unit tests.
 .PHONY: build-test unit-test test
 unit-test:
-	@docker build --progress plain --target test ./app
+	@docker --context default build --progress plain --target test ./app
 
 test: unit-test
 
 # Build a production image for the application.
 .PHONY: build
 build:
-	@docker build --target prod --tag ${PROD_IMAGE} ./app
+	@docker --context default build --target prod --tag ${PROD_IMAGE} ./app
 
 # Push the production image to a registry.
 .PHONY: push
 push: build
-	@docker push ${PROD_IMAGE}
+	@docker --context default push ${PROD_IMAGE}
 
 # Run the production image either via compose or run
 .PHONY: deploy run
-deploy: build
-	@PROD_IMAGE=${PROD_IMAGE} docker-compose up -d
+deploy: build push check-env
+	HUB_PULL_SECRET=${HUB_PULL_SECRET} PROD_IMAGE=${PROD_IMAGE} docker compose up
 
 run: build
-	@docker run -d -p 5000:5000 ${PROD_IMAGE}
+	@docker --context default run -d -p 5000:5000 ${PROD_IMAGE}
 
 # Remove the dev container, dev image, test image, and clear the builder cache.
 .PHONY: clean
@@ -56,3 +59,9 @@ clean:
 	@docker-compose -f docker-compose.dev.yml down
 	@docker rmi ${DEV_IMAGE} || true
 	@docker builder prune --force --filter type=exec.cachemount --filter=unused-for=24h
+
+.PHONY: check-env
+check-env:
+ifndef HUB_PULL_SECRET
+	$(error HUB_PULL_SECRET is undefined. Use docker ecs secret ls to find the ARN)
+endif

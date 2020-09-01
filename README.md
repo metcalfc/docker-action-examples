@@ -19,9 +19,9 @@ image.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/wor
 After CI when it comes time for production we want to use Docker's new Amazon
 ECS integration to deploy from Docker Compose directly to Amazon ECS with
 Fargate. So we will [push our release tagged images to Docker Hub](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml)
-which is integrated directly Amazon ECS via Docker Compose.
+which is integrated directly Amazon ECS [via Docker Compose.](https://github.com/metcalfc/docker-action-examples/blob/main/docker-compose.yml)
 
-The Dockerfile is setup to use multi stage builds. We have stages for
+The [Dockerfile](https://github.com/metcalfc/docker-action-examples/blob/main/app/Dockerfile) is setup to use multi stage builds. We have stages for
 [`test`](https://github.com/metcalfc/docker-action-examples/blob/main/app/Dockerfile#L9-L12)
 and [`prod`](https://github.com/metcalfc/docker-action-examples/blob/main/app/Dockerfile#L14-L16).
 This means we'll need Docker Buildx and we can use the a preview of the
@@ -101,7 +101,7 @@ After the application starts, navigate to `http://localhost:5000` in your web br
 
 ```
 $ curl localhost:5000
-Hello World!
+Hello Docker and GitHub!
 ```
 
 Stop and remove the containers

@@ -2,5 +2,6 @@ version: "3.8"
 services:
   web:
     image: ${PROD_IMAGE}
+    x-aws-pull_credentials: ${HUB_PULL_SECRET}
     ports:
       - "5000:5000"

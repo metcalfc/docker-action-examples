@@ -13,7 +13,7 @@ We want to setup CI to test:
 
 We are going to use GitHub Actions for the CI infrastructure. Since its local to
 GitHub Actions and free when used inside GitHub Actions we're going to use the
-new GitHub Container Registry to hold a copy of the nightly Docker image.
+new GitHub Container Registry to hold a copy of a nightly Docker image.
 
 After CI when it comes time for production we want to use Docker's new Amazon
 ECS integration to deploy from Docker Compose directly to Amazon ECS with
@@ -40,7 +40,8 @@ new Docker Buildx Action. This is going to let us achieve a couple awesome outco
   - linux/s390x
 
 I'm not going to have GitHub Action manage the deployment side of this example.
-Mostly because I don't want to leave an Amazon ECS cluster running.
+Mostly because I don't want to leave an Amazon ECS cluster running. But you can
+see a demo of this in one of my past streams: https://www.youtube.com/watch?v=RfQrgZFq_P0
 
 ## Compose sample application
 

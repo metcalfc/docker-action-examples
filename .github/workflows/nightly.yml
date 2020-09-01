@@ -1,4 +1,4 @@
-name: Main Branch CI
+name: Nightly Test
 
 # Run the nightly tests at at 2 AM UTC
 on:

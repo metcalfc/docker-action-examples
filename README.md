@@ -6,31 +6,35 @@ deployed in Docker containers using Dockerfiles and Docker Compose.
 
 We want to setup CI to test:
 
-- ✒ Every commit to `main`
-- ✉ Every PR
-- 🌃 Integration tests nightly
-- 🐳 Releases via tags pushed to Docker Hub.
+- ✒ [Every commit to `main`](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/main-ci.yml)
+- ✉ [Every PR](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/pr-ci.yml)
+- 🌃 [Integration tests nightly](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/nightly.yml)
+- 🐳 [Releases via tags pushed to Docker Hub.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml)
 
 We are going to use GitHub Actions for the CI infrastructure. Since its local to
-GitHub Actions and free when used inside GitHub Actions we're going to use the
-new GitHub Container Registry to hold a copy of a nightly Docker image.
+GitHub Actions and free when used inside GitHub Actions we're going to [use the
+new GitHub Container Registry to hold a copy of a nightly Docker
+image.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/main-ci.yml#L45-L51)
 
 After CI when it comes time for production we want to use Docker's new Amazon
 ECS integration to deploy from Docker Compose directly to Amazon ECS with
-Fargate. So we will push our release tagged images to Docker Hub which is
-integrated directly Amazon ECS via Docker Compose.
+Fargate. So we will [push our release tagged images to Docker Hub](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml)
+which is integrated directly Amazon ECS via Docker Compose.
 
-The Dockerfile is setup to use multi stage builds. We have stages for `test` and
-`prod`. This means we'll need Docker Buildx and we can use the a preview of the
+The Dockerfile is setup to use multi stage builds. We have stages for
+[`test`](https://github.com/metcalfc/docker-action-examples/blob/main/app/Dockerfile#L9-L12)
+and [`prod`](https://github.com/metcalfc/docker-action-examples/blob/main/app/Dockerfile#L14-L16).
+This means we'll need Docker Buildx and we can use the a preview of the
 new Docker Buildx Action. This is going to let us achieve a couple awesome outcomes:
 
 - We are going to use the buildx backend by default. Buildx out of the box brings a
-  number of improvements over the default `docker build`.
+  number of improvements over the default `docker build`. [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L40-L42)
 - We are going to setup buildx caching to take advantage of the GitHub Action Cache.
   You should see build performance improvements when repeating builds with common
-  layers.
+  layers. [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L44-L50)
+  [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L70-L71)
 - We are going to setup QEMU to do cross platform builds. In the example, we'll
-  build this application for every Linux architecture that Docker Hub supports:
+  build this application for every Linux architecture that Docker Hub supports. [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L35-L38) [Here.](https://github.com/metcalfc/docker-action-examples/blob/main/.github/workflows/release.yml#L67)
   - linux/386
   - linux/amd64
   - linux/arm/v6

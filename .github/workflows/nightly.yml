@@ -9,9 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROD_IMAGE: ghcr.io/metcalfc/docker-action-examples:edge
+      HUB_PULL_SECRET: NA 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Login to ghcr
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
       - name: Compose up
         run: docker-compose -f docker-compose.yml up -d
       - name: Check running containers

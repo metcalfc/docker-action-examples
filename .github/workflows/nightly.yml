@@ -24,6 +24,6 @@ jobs:
       - name: Check running containers
         run: docker ps -a
       - name: Check logs
-        run: docker logs web
+        run: docker-compose -f docker-compose.yml logs
       - name: Compose down
         run: docker-compose -f docker-compose.yml down

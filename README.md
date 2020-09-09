@@ -6,6 +6,13 @@ Welcome. This is a simple example application to show a common Docker specific
 GitHub Action setup. We have a Python Flask application that is built and
 deployed in Docker containers using Dockerfiles and Docker Compose.
 
+## Docker Actions v2
+
+- 🚪 [Docker Login](https://github.com/docker/login-action)
+- 🛠 [Setup Buildx](https://github.com/docker/setup-buildx-action)
+- 🎭 [Setup Cross Platform Builds](https://github.com/docker/setup-qemu-action)
+- 🔨 [Docker Build](https://github.com/docker/build-push-action)
+
 ## CI Setup
 
 We want to setup CI to test:

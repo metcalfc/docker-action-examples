@@ -75,7 +75,7 @@ Once you have the PAT you can create an action secret: https://docs.github.com/e
 
 You can call the secret whatever you want. But `GHCR_TOKEN` is what I used for the example above.
 
-### I thought GHRC had anonymous pulls?
+### I thought GHCR had anonymous pulls?
 
 Its a beta product so the documentation doesn't really exist yet. If you dig around on
 [GitHub's Community site](https://github.community/tag/ghcr) you can find some answers.

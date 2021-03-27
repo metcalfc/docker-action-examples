@@ -57,24 +57,6 @@ see a demo of this in one of my past streams: https://www.youtube.com/watch?v=Rf
 
 ## GitHub Container Registry FAQ
 
-### Where does this `secret.GHCR_TOKEN` come from?
-
-The secret isn't automatically populated. The original GitHub Packages container registry did use the automatically generated `GITHUB_TOKEN`. GitHub has said that support for that will be added to this new registry in the future.
-
-<br>
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Support for Actions through GITHUB_TOKEN is coming.</p>&mdash; Bryan Clark (@clarkbw) <a href="https://twitter.com/clarkbw/status/1300853015113396225?ref_src=twsrc%5Etfw">September 1, 2020</a></blockquote>
-
-<br>
-
-For now you will need to create a GitHub Personal Access Token (PAT) which you can do by going here: https://github.com/settings/tokens
-
-You'll need to create the PAT with the correct scopes which you can find here: https://docs.github.com/en/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry
-
-Once you have the PAT you can create an action secret: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
-
-You can call the secret whatever you want. But `GHCR_TOKEN` is what I used for the example above.
-
 ### I thought GHCR had anonymous pulls?
 
 Its a beta product so the documentation doesn't really exist yet. If you dig around on

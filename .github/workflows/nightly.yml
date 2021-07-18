@@ -11,6 +11,8 @@ jobs:
       PROD_IMAGE: ghcr.io/metcalfc/docker-action-examples:edge
       HUB_PULL_SECRET: NA 
     steps:
+      # GitHub Actions do not automatically checkout your projects. If you need the code
+      # you need to check it out.
       - name: Checkout
         uses: actions/checkout@v2
       - name: Login to ghcr

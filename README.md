@@ -131,3 +131,18 @@ Stop and remove the containers
 ```
 $ docker-compose down
 ```
+
+## Troubleshooting
+
+The most common error we have seen in the issues is a build failure with the error:
+
+```buildx failed with: error: unable to prepare context: path "./yourprojectfolder" not found```
+
+This is due to some issue with access to the code. Often the code has not been checked out. Its 
+important to remember that GitHub Actions do not automatically check out a copy of the project. 
+You will need to use the [checkout action](https://github.com/actions/checkout). For example:
+
+```
+- name: Checkout
+  uses: actions/checkout@v2
+```
